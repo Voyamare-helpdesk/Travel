@@ -11,26 +11,47 @@
 *{box-sizing:border-box}
 body{margin:0;font:400 17px/1.5 "Source Sans 3",system-ui,sans-serif;color:var(--ink);background:var(--mist)}
 h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
-.hero{background:var(--ink);color:var(--white);padding:3rem 1.25rem 3.5rem}
-.wrap{max-width:960px;margin:0 auto}
-.brand{font:800 1.5rem "Bricolage Grotesque",sans-serif;letter-spacing:.01em;margin-bottom:1.5rem;color:var(--sun)}
-.hero h1{font-size:clamp(2rem,6vw,3.6rem);font-weight:800;max-width:14ch}
-.hero p{color:#b9d3d8;max-width:46ch;margin:.75rem 0 1.75rem}
-form.search{display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;background:var(--white);padding:1rem;border-radius:6px;color:var(--ink)}
-label{display:flex;flex-direction:column;font-size:.85rem;color:var(--muted);gap:.25rem}
-input,select{font:inherit;padding:.6rem;border:1px solid var(--line);border-radius:4px;color:var(--ink);background:var(--white);min-width:0}
+.hero{background:var(--ink);color:var(--white);padding:2rem 1.25rem 3rem}
+.wrap{max-width:980px;margin:0 auto}
+.brand{font:800 1.5rem "Bricolage Grotesque",sans-serif;margin-bottom:1.25rem;color:var(--sun)}
+.hero h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:800;max-width:15ch}
+.hero p{color:#b9d3d8;max-width:46ch;margin:.75rem 0 1.5rem}
+form.search{background:var(--white);padding:1rem;border-radius:6px;color:var(--ink)}
+.trip{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.trip label{flex-direction:row;align-items:center;gap:0;color:var(--ink);font-size:1rem}
+.trip input{position:absolute;opacity:0}
+.trip span{padding:.45rem 1rem;border:1px solid var(--line);border-radius:999px;cursor:pointer}
+.trip input:checked+span{background:var(--lagoon);color:var(--white);border-color:var(--lagoon)}
+.trip input:focus-visible+span{outline:3px solid var(--sun)}
+.leg{display:grid;grid-template-columns:1fr 1fr 11rem;gap:.75rem;margin-bottom:.75rem;align-items:end}
+.leg.ret{grid-template-columns:1fr 1fr 11rem 11rem}
+.leg.multi{grid-template-columns:1fr 1fr 11rem 5rem}
+.legno{grid-column:1/-1;font:700 .95rem "Bricolage Grotesque",sans-serif;color:var(--lagoon);margin-bottom:-.4rem}
+.px{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:.5rem 0}
+label,.ap>label{display:flex;flex-direction:column;font-size:.85rem;color:var(--muted);gap:.25rem}
+input,select{font:inherit;padding:.6rem;border:1px solid var(--line);border-radius:4px;color:var(--ink);background:var(--white);min-width:0;width:100%}
 input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:1px}
-.f2{grid-column:span 2}
+.ap{position:relative}
+.sug{position:absolute;left:0;right:0;top:100%;z-index:10;margin:2px 0 0;padding:0;list-style:none;background:var(--white);border:1px solid var(--line);border-radius:4px;max-height:300px;overflow:auto;box-shadow:0 8px 24px rgba(10,42,51,.18)}
+.sug li{padding:.5rem .75rem;cursor:pointer;font-size:.95rem}
+.sug li.city{font-weight:600;background:var(--mist)}
+.sug li.apt{padding-left:1.5rem}
+.sug li.on,.sug li:hover{background:var(--sun)}
+.sug small{color:var(--muted);display:block;font-size:.8rem}
+.sug li.on small,.sug li:hover small{color:var(--ink)}
+.sug li.none{cursor:default;color:var(--muted)}
 button{font:600 1rem "Source Sans 3",sans-serif;border:0;border-radius:4px;padding:.7rem 1.2rem;cursor:pointer;background:var(--sun);color:var(--ink)}
 button.alt{background:var(--lagoon);color:var(--white)}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
 button:disabled{opacity:.6;cursor:wait}
-form.search button{align-self:end;grid-column:span 2}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.5rem}
 main{padding:2rem 1.25rem 4rem}
 .status{color:var(--muted);margin:0 0 1rem}
 .err{color:#9b2c2c;font-weight:600}
 .offer{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;background:var(--white);border-left:6px solid var(--lagoon);padding:1rem 1.25rem;margin-bottom:.75rem}
-.route{display:flex;align-items:center;gap:.75rem;margin:.35rem 0}
-.route b{font:700 1.4rem "Bricolage Grotesque",sans-serif}
+.sl{margin:.4rem 0 .8rem}
+.route{display:flex;align-items:center;gap:.75rem}
+.route b{font:700 1.3rem "Bricolage Grotesque",sans-serif}
 .track{flex:1;min-width:60px;height:2px;background:var(--lagoon);position:relative}
 .track i{position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--sun);border:2px solid var(--lagoon)}
 .meta{color:var(--muted);font-size:.9rem}
@@ -38,14 +59,16 @@ main{padding:2rem 1.25rem 4rem}
 .price strong{display:block;font:700 1.6rem "Bricolage Grotesque",sans-serif}
 .panel{background:var(--white);padding:1.5rem;border-radius:6px}
 .panel h2{font-size:1.6rem;margin-bottom:1rem}
-.pax{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin:.75rem 0 1.25rem}
+.pax{display:grid;grid-template-columns:7rem 1fr 1fr 1fr 7rem;gap:.75rem;margin:.5rem 0 1rem;align-items:end}
+.ph{margin-top:1rem;display:flex;align-items:baseline;gap:.5rem}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 table{width:100%;border-collapse:collapse;margin:1rem 0}
 td{padding:.4rem 0;border-bottom:1px solid var(--line)}
 td:last-child{text-align:right}
 tr.total td{font-weight:700;font-size:1.15rem;border-bottom:0}
 .hidden{display:none}
 .note{font-size:.9rem;color:var(--muted)}
-@media(max-width:720px){form.search{grid-template-columns:1fr 1fr}.f2,form.search button{grid-column:span 2}.offer{grid-template-columns:1fr}.price{text-align:left}.pax{grid-template-columns:1fr}}
+@media(max-width:760px){.leg,.leg.ret,.leg.multi{grid-template-columns:1fr 1fr}.leg .ap{grid-column:span 2}.px{grid-template-columns:1fr 1fr}.offer{grid-template-columns:1fr}.price{text-align:left}.pax{grid-template-columns:1fr 1fr}.contact{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -54,16 +77,25 @@ tr.total td{font-weight:700;font-size:1.15rem;border-bottom:0}
 <div class="brand">Voyamare</div>
 <h1>Flights from Mauritius, one clear price</h1>
 <p>Search airlines, pick your flight and book in one place. Our service fee is shown before you pay.</p>
-<form class="search" id="searchForm">
-<label>From (airport code)<input id="from" value="MRU" maxlength="3" list="codes" required pattern="[A-Za-z]{3}"></label>
-<label>To (airport code)<input id="to" value="CDG" maxlength="3" list="codes" required pattern="[A-Za-z]{3}"></label>
-<label>Departure<input id="dep" type="date" required></label>
-<label>Return (optional)<input id="ret" type="date"></label>
-<label>Adults<select id="adults"></select></label>
+<form class="search" id="searchForm" novalidate>
+<div class="trip" role="radiogroup" aria-label="Trip type">
+<label><input type="radio" name="trip" value="oneway"><span>One-way</span></label>
+<label><input type="radio" name="trip" value="return" checked><span>Return</span></label>
+<label><input type="radio" name="trip" value="multi"><span>Multi-city</span></label>
+</div>
+<div id="legs"></div>
+<div class="row"><button type="button" class="ghost hidden" id="addLeg">Add another flight</button></div>
+<div class="px">
+<label>Adults (12+)<select id="adults"></select></label>
+<label>Children (2–11)<select id="children"></select></label>
+<label>Infants (under 2)<select id="infants"></select></label>
 <label>Cabin<select id="cabin"><option value="economy">Economy</option><option value="premium_economy">Premium economy</option><option value="business">Business</option></select></label>
-<button class="f2" id="searchBtn">Search flights</button>
+</div>
+<div class="px" id="ages"></div>
+<p class="note">Infants travel on an adult’s lap, so you need at least one adult per infant.</p>
+<p class="err" id="formErr" role="alert"></p>
+<button id="searchBtn">Search flights</button>
 </form>
-<datalist id="codes"><option value="MRU">Mauritius</option><option value="RUN">Réunion</option><option value="CDG">Paris</option><option value="LHR">London</option><option value="DXB">Dubai</option><option value="JNB">Johannesburg</option><option value="CPT">Cape Town</option><option value="BOM">Mumbai</option><option value="DEL">Delhi</option><option value="SIN">Singapore</option><option value="DOH">Doha</option><option value="NBO">Nairobi</option></datalist>
 </div></header>
 
 <main><div class="wrap">
@@ -73,102 +105,224 @@ tr.total td{font-weight:700;font-size:1.15rem;border-bottom:0}
 
 <script>
 // ---- Settings ----
-const SERVICE_FEE = 21.99;            // your fee in USD, shown before payment
-const API_BASE = "";                  // same server as this page (see server.js)
+const SERVICE_FEE = 21.99;   // USD per traveller (adults, children and infants). Change here.
+const API_BASE = "";         // same server as this page (see server.js)
 const DEMO = location.protocol === "file:" || new URLSearchParams(location.search).has("demo");
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const money = (n, cur="USD") => new Intl.NumberFormat("en", {style:"currency", currency:cur}).format(n);
-let offers = [], selected = null;
+const regions = new Intl.DisplayNames(["en"], {type:"region"});
+const country = cc => { try { return regions.of(cc) || cc; } catch (e) { return cc; } };
+const today = new Date().toISOString().slice(0,10);
+const addDays = n => { const x = new Date(); x.setDate(x.getDate() + n); return x.toISOString().slice(0,10); };
 
+// ---- Sample airports for demo mode (live mode uses Duffel place suggestions) ----
+const DB = [
+["Port Louis","MU","MRU",[["MRU","Sir Seewoosagur Ramgoolam International"]]],["Rodrigues","MU","RRG",[["RRG","Sir Gaëtan Duval"]]],
+["Paris","FR","PAR",[["CDG","Charles de Gaulle"],["ORY","Orly"]]],["Saint-Denis","RE","RUN",[["RUN","Roland Garros"]]],
+["London","GB","LON",[["LHR","Heathrow"],["LGW","Gatwick"],["STN","Stansted"]]],["Dubai","AE","DXB",[["DXB","Dubai International"],["DWC","Al Maktoum International"]]],
+["Johannesburg","ZA","JNB",[["JNB","O. R. Tambo International"]]],["Cape Town","ZA","CPT",[["CPT","Cape Town International"]]],
+["Mumbai","IN","BOM",[["BOM","Chhatrapati Shivaji Maharaj International"]]],["Delhi","IN","DEL",[["DEL","Indira Gandhi International"]]],
+["Singapore","SG","SIN",[["SIN","Changi"]]],["Doha","QA","DOH",[["DOH","Hamad International"]]],["Nairobi","KE","NBO",[["NBO","Jomo Kenyatta International"]]],
+["Antananarivo","MG","TNR",[["TNR","Ivato"]]],["Istanbul","TR","IST",[["IST","Istanbul Airport"],["SAW","Sabiha Gökçen"]]],
+["Frankfurt","DE","FRA",[["FRA","Frankfurt Airport"]]],["Geneva","CH","GVA",[["GVA","Geneva Airport"]]],["Sydney","AU","SYD",[["SYD","Kingsford Smith"]]],
+["New York","US","NYC",[["JFK","John F. Kennedy International"],["EWR","Newark Liberty International"],["LGA","LaGuardia"]]],["Addis Ababa","ET","ADD",[["ADD","Bole International"]]]
+].map(([city,cc,code,a]) => ({city, cc, code, airports:a.map(([c,n]) => ({code:c, name:n}))}));
+
+async function places(q) {
+  if (DEMO) {
+    const k = q.toLowerCase();
+    return DB.filter(p => (p.city + " " + country(p.cc) + " " + p.code + " " + p.airports.map(a => a.code + " " + a.name).join(" ")).toLowerCase().includes(k)).slice(0, 8);
+  }
+  const r = await fetch(API_BASE + "/api/places?q=" + encodeURIComponent(q));
+  return (await r.json()).places || [];
+}
+
+// ---- Airport search box: shows city, full country name and every airport ----
+let uid = 0;
+function airportField(label, init) {
+  const id = "ap" + (++uid), w = document.createElement("div");
+  w.className = "ap";
+  w.innerHTML = '<label for="' + id + '">' + label + '</label><input id="' + id + '" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="' + id + 'l" placeholder="City, country or airport"><ul class="sug" id="' + id + 'l" role="listbox" hidden></ul>';
+  const inp = w.querySelector("input"), ul = w.querySelector("ul");
+  let timer, seq = 0, active = -1;
+  const close = () => { ul.hidden = true; inp.setAttribute("aria-expanded", "false"); active = -1; };
+  const pick = li => { inp.value = li.dataset.text; inp.dataset.code = li.dataset.code; close(); };
+  const mark = i => { const o = ul.querySelectorAll("li[data-code]"); if (!o.length) return; active = (i + o.length) % o.length; o.forEach((x, k) => x.classList.toggle("on", k === active)); o[active].scrollIntoView({block:"nearest"}); };
+  if (init) { inp.value = init.text; inp.dataset.code = init.code; }
+  function show(list) {
+    const seen = new Set(); let h = "";
+    list.forEach(p => {
+      const c = country(p.cc), apts = p.airports.filter(a => !seen.has(a.code));
+      if (p.airports.length > 1) h += '<li class="city" data-code="' + esc(p.code) + '" data-text="' + esc(p.city + ", " + c + " — All airports (" + p.code + ")") + '" role="option">' + esc(p.city) + ', ' + esc(c) + '<small>All airports (' + esc(p.code) + ')</small></li>';
+      apts.forEach(a => { seen.add(a.code); h += '<li class="apt" data-code="' + esc(a.code) + '" data-text="' + esc(p.city + ", " + c + " — " + a.name + " (" + a.code + ")") + '" role="option">' + esc(a.name) + ' (' + esc(a.code) + ')<small>' + esc(p.city) + ', ' + esc(c) + '</small></li>'; });
+    });
+    ul.innerHTML = h || '<li class="none">No airports found. Try a city, country or airport code.</li>';
+    ul.hidden = false; inp.setAttribute("aria-expanded", "true"); active = -1;
+  }
+  inp.addEventListener("input", () => {
+    inp.dataset.code = ""; clearTimeout(timer);
+    const q = inp.value.trim();
+    if (q.length < 2) return close();
+    timer = setTimeout(async () => { const my = ++seq; let r = []; try { r = await places(q); } catch (e) {} if (my === seq) show(r); }, 250);
+  });
+  inp.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown") { e.preventDefault(); mark(active + 1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); mark(active - 1); }
+    else if (e.key === "Enter" && !ul.hidden && active >= 0) { e.preventDefault(); pick(ul.querySelectorAll("li[data-code]")[active]); }
+    else if (e.key === "Escape") close();
+  });
+  inp.addEventListener("blur", () => setTimeout(close, 150));
+  ul.addEventListener("mousedown", e => { const li = e.target.closest("li[data-code]"); if (li) { e.preventDefault(); pick(li); } });
+  return w;
+}
+
+// ---- Trip type and flight legs ----
+const MRU = {code:"MRU", text:"Port Louis, Mauritius — Sir Seewoosagur Ramgoolam International (MRU)"};
+let legs = [{from:MRU, to:null, date:addDays(30), ret:addDays(37)}];
+const mode = () => document.querySelector('input[name="trip"]:checked').value;
+
+function syncLegs() {
+  const rows = [...$("legs").querySelectorAll(".leg")];
+  if (!rows.length) return;
+  const get = i => i.dataset.code ? {code:i.dataset.code, text:i.value} : null;
+  legs = rows.map(r => ({from:get(r.querySelector(".f input")), to:get(r.querySelector(".t input")), date:r.querySelector(".d").value, ret:(r.querySelector(".r") || {}).value || ""}));
+}
+function renderLegs() {
+  const m = mode(), box = $("legs"); box.innerHTML = "";
+  if (m === "multi") { while (legs.length < 2) legs.push({from:legs[legs.length-1].to, to:null, date:"", ret:""}); }
+  else legs = legs.slice(0, 1);
+  legs.forEach((l, i) => {
+    const row = document.createElement("div");
+    row.className = "leg" + (m === "return" ? " ret" : m === "multi" ? " multi" : "");
+    if (m === "multi") row.insertAdjacentHTML("beforeend", '<div class="legno">Flight ' + (i + 1) + '</div>');
+    const f = airportField("From", l.from), t = airportField("To", l.to);
+    f.classList.add("f"); t.classList.add("t"); row.append(f, t);
+    row.insertAdjacentHTML("beforeend", '<label>Departure<input class="d" type="date" min="' + (i && legs[i-1].date || today) + '" value="' + esc(l.date) + '"></label>');
+    if (m === "return") row.insertAdjacentHTML("beforeend", '<label>Return<input class="r" type="date" min="' + today + '" value="' + esc(l.ret) + '"></label>');
+    if (m === "multi" && legs.length > 2) { const b = document.createElement("button"); b.type = "button"; b.className = "ghost"; b.textContent = "Remove"; b.onclick = () => { syncLegs(); legs.splice(i, 1); renderLegs(); }; row.append(b); }
+    box.append(row);
+  });
+  $("addLeg").classList.toggle("hidden", !(m === "multi" && legs.length < 5));
+}
+document.querySelectorAll('input[name="trip"]').forEach(r => r.onchange = () => { syncLegs(); renderLegs(); });
+$("addLeg").onclick = () => { syncLegs(); const last = legs[legs.length - 1]; legs.push({from:last.to, to:null, date:"", ret:""}); renderLegs(); };
+
+// ---- Travellers ----
 for (let i = 1; i <= 9; i++) $("adults").add(new Option(i, i));
-const d = new Date(); d.setDate(d.getDate() + 30);
-$("dep").value = d.toISOString().slice(0,10);
-$("dep").min = new Date().toISOString().slice(0,10);
+for (let i = 0; i <= 8; i++) $("children").add(new Option(i, i));
+for (let i = 0; i <= 4; i++) $("infants").add(new Option(i, i));
+$("children").onchange = () => {
+  const n = +$("children").value, old = [...$("ages").querySelectorAll("select")].map(s => s.value);
+  $("ages").innerHTML = "";
+  for (let i = 0; i < n; i++) {
+    const l = document.createElement("label"); l.textContent = "Child " + (i + 1) + " age";
+    const s = document.createElement("select"); s.className = "age";
+    for (let a = 2; a <= 11; a++) s.add(new Option(a + " years", a));
+    s.value = old[i] || "8"; l.append(s); $("ages").append(l);
+  }
+};
 
-const fmtTime = iso => new Date(iso).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
-const fmtDur = iso => (iso||"").replace("PT","").replace("H","h ").replace("M","m").toLowerCase();
+// ---- Search ----
+let offers = [], trip = null;
+const fmtTime = iso => new Date(iso).toLocaleTimeString("en-GB", {hour:"2-digit", minute:"2-digit"});
+const fmtDay = iso => new Date(iso).toLocaleDateString("en-GB", {weekday:"short", day:"numeric", month:"short"});
+const fmtDur = iso => (iso || "").replace("PT", "").replace("H", "h ").replace("M", "m").toLowerCase();
 
-function demoOffers(from, to, dep) {
-  const air = [["Air Mauritius",740,"PT12H20M",1],["Emirates",690,"PT15H05M",1],["Air France",810,"PT11H40M",0],["Turkish Airlines",655,"PT17H30M",1]];
-  return air.map((a,i) => ({id:"demo_"+i, total_amount:String(a[1]), total_currency:"USD", owner:{name:a[0]},
-    slices:[{duration:a[2], segments:[{origin:{iata_code:from}, destination:{iata_code:to}, departing_at:dep+"T"+["09:45","21:15","23:30","02:10"][i]+":00", arriving_at:dep+"T"+["22:05","12:20","11:10","19:40"][i]+":00", stops:a[3]}]}]}));
+function demoOffers(slices) {
+  const air = [["Air Mauritius",740,"PT12H20M",1,"09:45","22:05"],["Emirates",690,"PT15H05M",1,"21:15","12:20"],["Air France",810,"PT11H40M",0,"23:30","11:10"],["Turkish Airlines",655,"PT17H30M",1,"02:10","19:40"]];
+  return air.map((a, i) => ({id:"demo_" + i, total_amount:String(a[1] * trip.pax.length), total_currency:"USD", owner:{name:a[0]},
+    slices:slices.map(s => ({duration:a[2], segments:Array.from({length:a[3] + 1}, (_, k, arr) => ({origin:{iata_code:k ? "HUB" : s.from}, destination:{iata_code:k < a[3] ? "HUB" : s.to}, departing_at:s.date + "T" + (k ? "15:00" : a[4]) + ":00", arriving_at:s.date + "T" + (k < a[3] ? "13:30" : a[5]) + ":00"}))}))}));
 }
 
 $("searchForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  const from = $("from").value.toUpperCase(), to = $("to").value.toUpperCase();
+  e.preventDefault(); syncLegs();
+  const m = mode(), err = $("formErr"); err.textContent = "";
+  const adults = +$("adults").value, kids = [...$("ages").querySelectorAll(".age")].map(s => +s.value), infants = +$("infants").value;
+  let slices = legs.map(l => ({from:l.from && l.from.code, to:l.to && l.to.code, date:l.date}));
+  if (m === "return") slices.push({from:slices[0].to, to:slices[0].from, date:legs[0].ret});
+  if (slices.some(s => !s.from || !s.to)) return err.textContent = "Choose each airport from the suggestion list.";
+  if (slices.some(s => !s.date)) return err.textContent = "Enter a date for every flight.";
+  if (slices.some(s => s.from === s.to)) return err.textContent = "Departure and arrival airports must be different.";
+  if (slices.some((s, i) => i && s.date < slices[i-1].date)) return err.textContent = "Each flight must be on or after the one before it.";
+  if (infants > adults) return err.textContent = "Each infant needs an adult. Add an adult or remove an infant.";
+  if (adults + kids.length > 9) return err.textContent = "You can book up to 9 travellers (adults and children) at once.";
+  const pax = [...Array(adults).fill({kind:"adult"}), ...kids.map(a => ({kind:"child", age:a})), ...Array(infants).fill({kind:"infant"})];
+  trip = {slices, pax, cabin:$("cabin").value};
   const btn = $("searchBtn"); btn.disabled = true; btn.textContent = "Searching…";
-  $("checkout").classList.add("hidden");
-  $("results").innerHTML = '<p class="status">Searching airlines…</p>';
+  $("checkout").classList.add("hidden"); $("results").innerHTML = '<p class="status">Searching airlines…</p>';
   try {
-    if (DEMO) { offers = demoOffers(from, to, $("dep").value); }
+    if (DEMO) offers = demoOffers(slices);
     else {
-      const r = await fetch(API_BASE + "/api/search", {method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({from, to, departure:$("dep").value, ret:$("ret").value||null, adults:+$("adults").value, cabin:$("cabin").value})});
-      const j = await r.json();
-      if (!r.ok) throw new Error(j.error || "Search failed");
+      const r = await fetch(API_BASE + "/api/search", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({slices, adults, children:kids, infants, cabin:trip.cabin})});
+      const j = await r.json(); if (!r.ok) throw new Error(j.error || "Search failed.");
       offers = j.offers;
     }
-    renderOffers(from, to);
-  } catch (err) {
-    $("results").innerHTML = '<p class="err">' + esc(err.message) + ' Check the airport codes and dates, then search again.</p>';
-  } finally { btn.disabled = false; btn.textContent = "Search flights"; }
+    renderOffers();
+  } catch (x) { $("results").innerHTML = '<p class="err">' + esc(x.message) + ' Check the airports and dates, then search again.</p>'; }
+  finally { btn.disabled = false; btn.textContent = "Search flights"; }
 });
 
-function renderOffers(from, to) {
-  if (!offers.length) { $("results").innerHTML = '<p class="status">No flights found for these dates. Try nearby dates or another airport.</p>'; return; }
-  const n = +$("adults").value;
-  $("results").innerHTML = '<p class="status">' + offers.length + ' flights, ' + esc(from) + ' to ' + esc(to) + (DEMO ? ' (sample data: run the server for live fares)' : '') + '</p>' +
-    offers.map((o,i) => {
-      const s = o.slices[0], f = s.segments[0], l = s.segments[s.segments.length-1], stops = s.segments.length - 1;
-      return '<article class="offer"><div><strong>' + esc(o.owner.name) + '</strong>' +
-        '<div class="route"><b>' + fmtTime(f.departing_at) + '</b><span>' + esc(f.origin.iata_code) + '</span><span class="track"><i style="left:' + (stops ? 45 : 85) + '%"></i></span><span>' + esc(l.destination.iata_code) + '</span><b>' + fmtTime(l.arriving_at) + '</b></div>' +
-        '<div class="meta">' + fmtDur(s.duration) + ' · ' + (stops ? stops + (stops > 1 ? ' stops' : ' stop') : 'Direct') + '</div></div>' +
-        '<div class="price"><strong>' + money(+o.total_amount + SERVICE_FEE * n, o.total_currency) + '</strong><span class="meta">total, fee included</span><br><button class="alt" data-i="' + i + '">Select</button></div></article>';
-    }).join("");
+function renderOffers() {
+  if (!offers.length) { $("results").innerHTML = '<p class="status">No flights found. Try nearby dates or another airport.</p>'; return; }
+  const n = trip.pax.length;
+  $("results").innerHTML = '<p class="status">' + offers.length + ' options for ' + n + ' traveller' + (n > 1 ? 's' : '') + (DEMO ? ' (sample data: run the server for live fares)' : '') + '</p>' +
+    offers.map((o, i) => '<article class="offer"><div><strong>' + esc(o.owner.name) + '</strong>' + o.slices.map(s => {
+      const f = s.segments[0], l = s.segments[s.segments.length - 1], st = s.segments.length - 1;
+      return '<div class="sl"><div class="meta">' + fmtDay(f.departing_at) + '</div><div class="route"><b>' + fmtTime(f.departing_at) + '</b><span>' + esc(f.origin.iata_code) + '</span><span class="track"><i style="left:' + (st ? 45 : 85) + '%"></i></span><span>' + esc(l.destination.iata_code) + '</span><b>' + fmtTime(l.arriving_at) + '</b></div><div class="meta">' + fmtDur(s.duration) + ' · ' + (st ? st + (st > 1 ? ' stops' : ' stop') : 'Direct') + '</div></div>';
+    }).join("") + '</div><div class="price"><strong>' + money(+o.total_amount + SERVICE_FEE * n, o.total_currency) + '</strong><span class="meta">total for ' + n + ', fee included</span><br><button class="alt" data-i="' + i + '">Select</button></div></article>').join("");
   $("results").querySelectorAll("button[data-i]").forEach(b => b.onclick = () => openCheckout(+b.dataset.i));
 }
 
+// ---- Checkout ----
+const ageOn = (dob, ref) => { const b = new Date(dob), r = new Date(ref); let a = r.getFullYear() - b.getFullYear(); if (r < new Date(r.getFullYear(), b.getMonth(), b.getDate())) a--; return a; };
+const label = p => p.kind === "adult" ? "Adult" : p.kind === "child" ? "Child (age " + p.age + ")" : "Infant (under 2, on an adult’s lap)";
+
 function openCheckout(i) {
-  selected = offers[i];
-  const n = +$("adults").value, cur = selected.total_currency;
-  const fare = +selected.total_amount, fee = SERVICE_FEE * n;
-  const sameCur = cur === "USD";
-  let pax = "";
-  for (let p = 1; p <= n; p++) pax += '<h3>Passenger ' + p + '</h3><div class="pax">' +
+  const o = offers[i], n = trip.pax.length, cur = o.total_currency, fare = +o.total_amount, fee = SERVICE_FEE * n, first = trip.slices[0].date;
+  let cnt = {adult:0, child:0, infant:0};
+  const pax = trip.pax.map(p => { const c = ++cnt[p.kind];
+    return '<div class="ph"><h3>' + (p.kind === "adult" ? "Adult " : p.kind === "child" ? "Child " : "Infant ") + c + '</h3><span class="meta">' + esc(label(p)) + '</span></div><div class="pax" data-kind="' + p.kind + '">' +
+    '<label>Title<select name="title"><option value="mr">Mr</option><option value="ms">Ms</option><option value="mrs">Mrs</option><option value="miss">Miss</option><option value="mstr">Master</option></select></label>' +
     '<label>First name (as on passport)<input name="given_name" required></label><label>Last name (as on passport)<input name="family_name" required></label>' +
-    '<label>Date of birth<input name="born_on" type="date" required></label><label>Gender<select name="gender"><option value="f">Female</option><option value="m">Male</option></select></label></div>';
-  $("checkout").innerHTML = '<h2>Your booking: ' + esc(selected.owner.name) + '</h2>' +
-    '<form id="bookForm">' + pax +
-    '<div class="pax"><label>Email<input name="email" type="email" required></label><label>Phone<input name="phone" type="tel" required placeholder="+230 5xxx xxxx"></label></div>' +
-    '<table><tr><td>Airline fare (' + n + ' adult' + (n > 1 ? 's' : '') + ')</td><td>' + money(fare, cur) + '</td></tr>' +
-    '<tr><td>Our service fee (' + money(SERVICE_FEE) + ' per passenger)</td><td>' + money(fee) + '</td></tr>' +
-    '<tr class="total"><td>Total to pay</td><td>' + (sameCur ? money(fare + fee) : money(fare, cur) + ' + ' + money(fee)) + '</td></tr></table>' +
-    '<p class="note">Card details are entered in your payment provider’s secure form and never touch this site. Check each name against the passport: airlines charge to correct mistakes.</p>' +
-    '<button class="alt" id="payBtn">Pay and book</button> <button type="button" id="backBtn">Back to results</button></form>';
+    '<label>Date of birth<input name="born_on" type="date" max="' + today + '" required></label>' +
+    '<label>Gender<select name="gender"><option value="f">Female</option><option value="m">Male</option></select></label></div>'; }).join("");
+  $("checkout").innerHTML = '<h2>Your booking: ' + esc(o.owner.name) + '</h2><form id="bookForm" novalidate>' + pax +
+    '<h3 style="margin-top:1.25rem">Contact details</h3><div class="contact"><label>Email<input name="email" type="email" required></label><label>Phone<input name="phone" type="tel" required placeholder="+230 5xxx xxxx"></label></div>' +
+    '<table><tr><td>Airline fare (' + n + ' traveller' + (n > 1 ? 's' : '') + ')</td><td>' + money(fare, cur) + '</td></tr>' +
+    '<tr><td>Our service fee (' + money(SERVICE_FEE) + ' × ' + n + ')</td><td>' + money(fee) + '</td></tr>' +
+    '<tr class="total"><td>Total to pay</td><td>' + (cur === "USD" ? money(fare + fee) : money(fare, cur) + ' + ' + money(fee)) + '</td></tr></table>' +
+    '<p class="note">Card details are entered in your payment provider’s secure form and never touch this site. Names and birth dates must match each passport: airlines charge to correct mistakes.</p>' +
+    '<p class="err" id="bookErr" role="alert"></p><button class="alt" id="payBtn">Pay and book</button> <button type="button" class="ghost" id="backBtn">Back to results</button></form>';
   $("checkout").classList.remove("hidden"); $("checkout").scrollIntoView({behavior:"smooth"});
   $("backBtn").onclick = () => $("checkout").classList.add("hidden");
   $("bookForm").onsubmit = async e => {
-    e.preventDefault();
-    const fd = new FormData(e.target), pb = $("payBtn"); pb.disabled = true; pb.textContent = "Booking…";
-    const names = fd.getAll("given_name"), fams = fd.getAll("family_name"), dobs = fd.getAll("born_on"), gens = fd.getAll("gender");
-    const passengers = names.map((g,k) => ({given_name:g, family_name:fams[k], born_on:dobs[k], gender:gens[k]}));
+    e.preventDefault(); const be = $("bookErr"); be.textContent = "";
+    const blocks = [...e.target.querySelectorAll(".pax")], passengers = [];
+    for (let k = 0; k < blocks.length; k++) {
+      const v = nm => blocks[k].querySelector('[name="' + nm + '"]').value.trim(), p = trip.pax[k];
+      if (!v("given_name") || !v("family_name") || !v("born_on")) return be.textContent = "Fill in every passenger’s name and date of birth.";
+      const age = ageOn(v("born_on"), first);
+      if (p.kind === "adult" && age < 12) return be.textContent = "Adult " + (k + 1) + " must be 12 or older on the travel date.";
+      if (p.kind === "child" && (age < 2 || age > 11)) return be.textContent = "Passenger " + (k + 1) + " is booked as a child, so must be 2 to 11 on the travel date.";
+      if (p.kind === "infant" && age >= 2) return be.textContent = "Passenger " + (k + 1) + " is booked as an infant, so must be under 2 on the travel date.";
+      passengers.push({type:p.kind, title:v("title"), given_name:v("given_name"), family_name:v("family_name"), born_on:v("born_on"), gender:v("gender")});
+    }
+    const fd = new FormData(e.target); if (!fd.get("email") || !fd.get("phone")) return be.textContent = "Enter an email and phone number.";
+    const pb = $("payBtn"); pb.disabled = true; pb.textContent = "Booking…";
     try {
-      let ref = "DEMO" + Math.random().toString(36).slice(2,8).toUpperCase();
+      let ref = "DEMO" + Math.random().toString(36).slice(2, 8).toUpperCase();
       if (!DEMO) {
-        const r = await fetch(API_BASE + "/api/book", {method:"POST", headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({offer_id:selected.id, passengers, email:fd.get("email"), phone:fd.get("phone")})});
-        const j = await r.json(); if (!r.ok) throw new Error(j.error || "Booking failed"); ref = j.reference;
+        const r = await fetch(API_BASE + "/api/book", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({offer_id:o.id, passengers, email:fd.get("email"), phone:fd.get("phone")})});
+        const j = await r.json(); if (!r.ok) throw new Error(j.error || "Booking failed."); ref = j.reference;
       }
       $("checkout").innerHTML = '<h2>Booking confirmed</h2><p>Your reference is <strong>' + esc(ref) + '</strong>. A confirmation will be sent to ' + esc(fd.get("email")) + '.</p>' + (DEMO ? '<p class="note">This is a demo: no ticket was issued and no payment was taken.</p>' : '');
-    } catch (err) {
-      pb.disabled = false; pb.textContent = "Pay and book";
-      $("checkout").insertAdjacentHTML("afterbegin", '<p class="err">' + esc(err.message) + ' You have not been charged.</p>');
-    }
+    } catch (x) { pb.disabled = false; pb.textContent = "Pay and book"; be.textContent = x.message + " You have not been charged."; }
   };
 }
+
+renderLegs(); $("children").onchange();
 </script>
 </body>
 </html>
